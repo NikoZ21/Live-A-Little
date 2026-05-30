@@ -1,14 +1,15 @@
-import { Text, View } from "react-native";
+import Header from "@/components/Discovery/Header";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   return (
-    <View
+    <SafeAreaView
       style={{
         flex: 1,
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+      <Header count={10} />
+    </SafeAreaView>
   );
 }

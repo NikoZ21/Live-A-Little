@@ -8,7 +8,12 @@
     {
       "name": "AppHeader",
       "role": "Top brand row",
-      "layout": { "display": "flex", "justify": "space-between", "align": "center", "padding": "14 20 6" },
+      "layout": {
+        "display": "flex",
+        "justify": "space-between",
+        "align": "center",
+        "padding": "14 20 6"
+      },
       "children": [
         {
           "name": "BrandMark",
@@ -27,7 +32,12 @@
           "shadow": "token.pill",
           "typography": "type.metaStrong (800)",
           "children": [
-            { "name": "FlameIcon", "icon": "flame", "size": 16, "color": "token.accent" },
+            {
+              "name": "FlameIcon",
+              "icon": "flame",
+              "size": 16,
+              "color": "token.accent"
+            },
             { "name": "CountLabel", "content": "{n} active" }
           ]
         }
@@ -59,26 +69,49 @@
           "radius": "token.card (30)",
           "depthOffsetPx": 12,
           "depthScaleStep": 0.045,
-          "shadow": { "top": "token.shadow.cardTop", "behind": "token.shadow.cardBehind" },
+          "shadow": {
+            "top": "token.shadow.cardTop",
+            "behind": "token.shadow.cardBehind"
+          },
           "variants": {
             "bold": {
               "background": "category.color (full fill)",
               "textColor": "#fff",
               "decoration": "oversized translucent category glyph, opacity 0.16, top-right",
-              "structure": ["CategoryChip", "spacer", "DareNumber (DARE \u2116nn, opacity 0.6)", "CardTitle", "CardBlurb", "CardMeta"]
+              "structure": [
+                "CategoryChip",
+                "spacer",
+                "DareNumber (DARE \u2116nn, opacity 0.6)",
+                "CardTitle",
+                "CardBlurb",
+                "CardMeta"
+              ]
             },
             "paper": {
               "background": "token.paper",
               "border": "1px token.line",
               "topAccentBar": "10px tall, category.color",
               "textColor": "token.ink/sub",
-              "structure": ["CategoryChip", "spacer", "DareNumber (category.color, opacity 0.5)", "CardTitle", "CardBlurb", "CardMeta"]
+              "structure": [
+                "CategoryChip",
+                "spacer",
+                "DareNumber (category.color, opacity 0.5)",
+                "CardTitle",
+                "CardBlurb",
+                "CardMeta"
+              ]
             },
             "duotone": {
               "background": "placeholder Photo gradient by index",
               "overlay": "linear-gradient(180deg, category.color22 -> rgba(10,8,14,0.86))",
               "textColor": "#fff",
-              "structure": ["CategoryChip", "spacer", "CardTitle", "CardBlurb", "CardMeta"]
+              "structure": [
+                "CategoryChip",
+                "spacer",
+                "CardTitle",
+                "CardBlurb",
+                "CardMeta"
+              ]
             }
           },
           "children": [
@@ -108,8 +141,17 @@
               "name": "CardMeta",
               "layout": { "display": "flex", "gap": 16, "align": "center" },
               "children": [
-                { "name": "DurationMeta", "icon": "clock", "content": "{mins} min", "typography": "type.metaStrong" },
-                { "name": "NerveMeta", "label": "nerve", "control": "DifficultyDots" }
+                {
+                  "name": "DurationMeta",
+                  "icon": "clock",
+                  "content": "{mins} min",
+                  "typography": "type.metaStrong"
+                },
+                {
+                  "name": "NerveMeta",
+                  "label": "nerve",
+                  "control": "DifficultyDots"
+                }
               ]
             },
             {
@@ -125,21 +167,75 @@
           "name": "SwipeStamp",
           "role": "Overlay verdict stamp that fades in as you drag",
           "instances": [
-            { "side": "left", "text": "LET\u2019S GO", "color": "#1FBF75", "rotate": -14, "fadesWith": "drag right" },
-            { "side": "right", "text": "NOT TODAY", "color": "#9aa0a6", "rotate": 14, "fadesWith": "drag left" }
+            {
+              "side": "left",
+              "text": "LET\u2019S GO",
+              "color": "#1FBF75",
+              "rotate": -14,
+              "fadesWith": "drag right"
+            },
+            {
+              "side": "right",
+              "text": "NOT TODAY",
+              "color": "#9aa0a6",
+              "rotate": 14,
+              "fadesWith": "drag left"
+            }
           ],
-          "style": { "border": "4px solid color", "radius": 12, "padding": "4 14", "fontWeight": 900, "fontSize": 24, "letterSpacing": 1, "font": "Bricolage Grotesque", "textTransform": "uppercase" }
+          "style": {
+            "border": "4px solid color",
+            "radius": 12,
+            "padding": "4 14",
+            "fontWeight": 900,
+            "fontSize": 24,
+            "letterSpacing": 1,
+            "font": "Bricolage Grotesque",
+            "textTransform": "uppercase"
+          }
         }
       ]
     },
     {
       "name": "ActionBar",
       "role": "Tap alternatives to swiping",
-      "layout": { "display": "flex", "justify": "center", "align": "center", "gap": 22, "padding": "18 0 14" },
+      "layout": {
+        "display": "flex",
+        "justify": "center",
+        "align": "center",
+        "gap": 22,
+        "padding": "18 0 14"
+      },
       "children": [
-        { "name": "PassButton",     "control": "RoundButton", "size": 56, "background": "#fff", "border": "token.line", "icon": "close", "iconColor": "#9aa0a6", "action": "skip" },
-        { "name": "ReshuffleButton", "control": "RoundButton", "size": 46, "background": "#fff", "border": "token.line", "icon": "refresh", "iconColor": "token.sub", "action": "reshuffle deck" },
-        { "name": "AcceptButton",   "control": "RoundButton", "size": 56, "background": "token.accent", "border": "token.accent", "icon": "heart", "iconColor": "#fff", "action": "accept" }
+        {
+          "name": "PassButton",
+          "control": "RoundButton",
+          "size": 56,
+          "background": "#fff",
+          "border": "token.line",
+          "icon": "close",
+          "iconColor": "#9aa0a6",
+          "action": "skip"
+        },
+        {
+          "name": "ReshuffleButton",
+          "control": "RoundButton",
+          "size": 46,
+          "background": "#fff",
+          "border": "token.line",
+          "icon": "refresh",
+          "iconColor": "token.sub",
+          "action": "reshuffle deck"
+        },
+        {
+          "name": "AcceptButton",
+          "control": "RoundButton",
+          "size": 56,
+          "background": "token.accent",
+          "border": "token.accent",
+          "icon": "heart",
+          "iconColor": "#fff",
+          "action": "accept"
+        }
       ]
     }
   ],
@@ -154,6 +250,13 @@
   },
 
   "transientUI": {
-    "Toast": { "trigger": "accept/reshuffle/giveBack", "position": "bottom center, 18px", "background": "token.ink", "textColor": "#fff", "shape": "pill", "autoHideMs": 1800 }
+    "Toast": {
+      "trigger": "accept/reshuffle/giveBack",
+      "position": "bottom center, 18px",
+      "background": "token.ink",
+      "textColor": "#fff",
+      "shape": "pill",
+      "autoHideMs": 1800
+    }
   }
 }
