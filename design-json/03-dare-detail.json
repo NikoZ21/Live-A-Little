@@ -1,0 +1,66 @@
+{
+  "page": "DareDetail",
+  "route": "overlay (type: detail), zIndex 60",
+  "purpose": "Full view of one accepted dare. Shows the big card, a gentle encouragement note, and the choice to give it back or mark it done (which opens Capture).",
+  "surface": { "background": "token.bg", "layout": "column" },
+
+  "components": [
+    {
+      "name": "TopBar",
+      "role": "Back navigation + screen title",
+      "layout": { "display": "flex", "align": "center", "gap": 6, "padding": "8 14 6" },
+      "children": [
+        { "name": "BackButton", "type": "button", "shape": "circle 42", "icon": "arrowR rotated 180", "iconColor": "token.ink", "action": "closeOverlay" },
+        { "name": "TopBarTitle", "content": "Your dare", "typography": { "family": "display", "size": 20, "weight": 800 }, "color": "token.ink", "whiteSpace": "nowrap" }
+      ]
+    },
+    {
+      "name": "DetailBody",
+      "layout": { "flex": 1, "overflow": "auto", "padding": "8 20 20" },
+      "children": [
+        {
+          "name": "DareCardLarge",
+          "role": "Same DareCard component as Discover but big=true",
+          "height": 420,
+          "marginBottom": 22,
+          "ref": "01-discover.json#DareCard"
+        },
+        {
+          "name": "EncouragementNote",
+          "role": "Gentle nudge panel (brand voice)",
+          "background": "category.tint",
+          "radius": "token.radii.tile (18)",
+          "padding": "16 18",
+          "children": [
+            { "name": "NoteHeading", "content": "A gentle nudge", "typography": { "family": "display", "size": 14, "weight": 800 }, "color": "category.color" },
+            { "name": "NoteBody", "content": "No pressure, no rush. Whenever it feels right today \u2014 go do the thing. Then come back and keep the moment.", "typography": { "family": "body", "size": 15.5, "lineHeight": 1.45 }, "color": "token.ink" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DetailFooter",
+      "role": "Sticky action bar",
+      "layout": { "display": "flex", "gap": 12, "padding": "12 20 18" },
+      "borderTop": "1px token.line",
+      "background": "token.bg",
+      "children": [
+        {
+          "name": "GiveBackButton",
+          "control": "GhostButton",
+          "content": "Give it back",
+          "action": "giveBack(card) -> removes from active, closes",
+          "style": { "flex": 1, "background": "transparent", "border": "1.5px token.line", "color": "token.sub", "radius": "token.radii.button", "typography": "type.buttonLabel (15)" }
+        },
+        {
+          "name": "DoneButton",
+          "control": "PrimaryButton",
+          "content": "Done \u2014 keep it",
+          "icon": "check @20 #fff",
+          "action": "openCapture(card)",
+          "style": { "flex": 1.4, "background": "token.accent", "color": "#fff", "radius": "token.radii.button", "shadow": "token.shadow.primaryButton", "typography": "type.buttonLabel (16.5)" }
+        }
+      ]
+    }
+  ]
+}

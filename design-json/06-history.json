@@ -1,0 +1,59 @@
+{
+  "page": "History",
+  "route": "tab: history",
+  "purpose": "A clean chronological list of every lived dare. The plain-language ledger counterpart to the Storybook.",
+  "surface": { "background": "token.bg", "layout": "column" },
+
+  "components": [
+    {
+      "name": "ScreenHead",
+      "ref": "05-storybook.json#ScreenHead",
+      "children": [
+        { "name": "ScreenTitle", "content": "History", "typography": "type.screenTitle" },
+        { "name": "ScreenSubtitle", "content": "{n} dares lived", "typography": "type.handLine", "color": "token.sub" }
+      ]
+    },
+    {
+      "name": "HistoryList",
+      "layout": { "flex": 1, "overflow": "auto", "padding": "4 20 24", "gap": 12 },
+      "sort": "most recent first",
+      "emptyState": { "content": "Your lived dares will land here.", "color": "token.sub", "align": "center" },
+      "children": [
+        {
+          "name": "HistoryRow",
+          "type": "button",
+          "action": "openMemory(id) -> opens CaptureMoment in edit mode",
+          "layout": { "display": "flex", "align": "center", "gap": 14, "padding": 12 },
+          "background": "#fff",
+          "border": "1px token.line",
+          "radius": "token.radii.tile (18)",
+          "children": [
+            {
+              "name": "Thumbnail",
+              "size": { "width": 60, "height": 60 },
+              "radius": "token.radii.tileSmall (13)",
+              "content": "memory.photo OR placeholder gradient by photoIdx"
+            },
+            {
+              "name": "RowText",
+              "layout": { "flex": 1 },
+              "children": [
+                {
+                  "name": "CategoryTag",
+                  "layout": { "display": "flex", "align": "center", "gap": 7 },
+                  "children": [
+                    { "name": "CategoryDot", "size": 9, "color": "category.color" },
+                    { "name": "CategoryLabel", "content": "category.label", "typography": { "family": "body", "size": 11.5, "weight": 800, "textTransform": "uppercase", "letterSpacing": 0.4 }, "color": "category.color" }
+                  ]
+                },
+                { "name": "RowTitle", "content": "challenge.title", "typography": "type.rowTitle", "color": "token.ink" },
+                { "name": "RowDate", "content": "relative date", "typography": { "family": "body", "size": 13, "weight": 600 }, "color": "token.sub" }
+              ]
+            },
+            { "name": "ChevronIcon", "icon": "arrowR", "size": 18, "color": "token.line" }
+          ]
+        }
+      ]
+    }
+  ]
+}

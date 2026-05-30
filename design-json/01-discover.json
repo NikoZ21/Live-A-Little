@@ -1,0 +1,159 @@
+{
+  "page": "Discover",
+  "route": "tab: discover",
+  "purpose": "The home swipe deck. A stack of dare cards the user drags right (accept) or left (pass). Unlimited — reshuffles fresh dares when the pool runs low.",
+  "surface": { "background": "token.bg", "layout": "column" },
+
+  "components": [
+    {
+      "name": "AppHeader",
+      "role": "Top brand row",
+      "layout": { "display": "flex", "justify": "space-between", "align": "center", "padding": "14 20 6" },
+      "children": [
+        {
+          "name": "BrandMark",
+          "type": "text",
+          "content": "live a little",
+          "typography": "type.brandMark",
+          "color": "token.ink",
+          "detail": "the word 'a little' is colored token.accent; whiteSpace: nowrap"
+        },
+        {
+          "name": "ActiveCountPill",
+          "type": "button",
+          "action": "opens ActiveSheet overlay",
+          "shape": "pill (radius 100)",
+          "background": "#fff",
+          "shadow": "token.pill",
+          "typography": "type.metaStrong (800)",
+          "children": [
+            { "name": "FlameIcon", "icon": "flame", "size": 16, "color": "token.accent" },
+            { "name": "CountLabel", "content": "{n} active" }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "SwipeHint",
+      "type": "text",
+      "content": "Swipe right to take the dare \u00b7 left to pass",
+      "typography": { "family": "body", "size": 14.5, "weight": 600 },
+      "color": "token.sub",
+      "padding": "0 20 8"
+    },
+    {
+      "name": "CardDeck",
+      "role": "Stacked, draggable dare cards (renders top 3)",
+      "layout": { "flex": 1, "position": "relative", "margin": "4 20 0" },
+      "interaction": {
+        "drag": "pointer events on top card only; translate + rotate(dx*0.055)",
+        "thresholdPx": 105,
+        "right": "accept(card) -> moves to active tray, fly-off 520px",
+        "left": "skip(card) -> increments skipped, fly-off -520px",
+        "settle": "token.motion.cardSettle"
+      },
+      "children": [
+        {
+          "name": "DareCard",
+          "role": "Single card face (variant-driven). Repeated x3 with depth offset/scale.",
+          "radius": "token.card (30)",
+          "depthOffsetPx": 12,
+          "depthScaleStep": 0.045,
+          "shadow": { "top": "token.shadow.cardTop", "behind": "token.shadow.cardBehind" },
+          "variants": {
+            "bold": {
+              "background": "category.color (full fill)",
+              "textColor": "#fff",
+              "decoration": "oversized translucent category glyph, opacity 0.16, top-right",
+              "structure": ["CategoryChip", "spacer", "DareNumber (DARE \u2116nn, opacity 0.6)", "CardTitle", "CardBlurb", "CardMeta"]
+            },
+            "paper": {
+              "background": "token.paper",
+              "border": "1px token.line",
+              "topAccentBar": "10px tall, category.color",
+              "textColor": "token.ink/sub",
+              "structure": ["CategoryChip", "spacer", "DareNumber (category.color, opacity 0.5)", "CardTitle", "CardBlurb", "CardMeta"]
+            },
+            "duotone": {
+              "background": "placeholder Photo gradient by index",
+              "overlay": "linear-gradient(180deg, category.color22 -> rgba(10,8,14,0.86))",
+              "textColor": "#fff",
+              "structure": ["CategoryChip", "spacer", "CardTitle", "CardBlurb", "CardMeta"]
+            }
+          },
+          "children": [
+            {
+              "name": "CategoryChip",
+              "shape": "pill",
+              "background": "category.tint (or rgba(255,255,255,0.22) in bold/duotone)",
+              "color": "category.color (or #fff)",
+              "typography": "type.chip",
+              "content": "{verb} \u00b7 {label}",
+              "icon": "category.icon (toggle via showIcons)"
+            },
+            {
+              "name": "CardTitle",
+              "type": "text",
+              "content": "challenge.title",
+              "typography": "type.cardTitle",
+              "textWrap": "balance"
+            },
+            {
+              "name": "CardBlurb",
+              "type": "text",
+              "content": "challenge.blurb",
+              "typography": "type.cardBlurb"
+            },
+            {
+              "name": "CardMeta",
+              "layout": { "display": "flex", "gap": 16, "align": "center" },
+              "children": [
+                { "name": "DurationMeta", "icon": "clock", "content": "{mins} min", "typography": "type.metaStrong" },
+                { "name": "NerveMeta", "label": "nerve", "control": "DifficultyDots" }
+              ]
+            },
+            {
+              "name": "DifficultyDots",
+              "role": "1-3 dots, filled = difficulty",
+              "dotSize": 7,
+              "filledColor": "category.color (or #fff)",
+              "emptyStyle": "1.6px ring, opacity 0.4"
+            }
+          ]
+        },
+        {
+          "name": "SwipeStamp",
+          "role": "Overlay verdict stamp that fades in as you drag",
+          "instances": [
+            { "side": "left", "text": "LET\u2019S GO", "color": "#1FBF75", "rotate": -14, "fadesWith": "drag right" },
+            { "side": "right", "text": "NOT TODAY", "color": "#9aa0a6", "rotate": 14, "fadesWith": "drag left" }
+          ],
+          "style": { "border": "4px solid color", "radius": 12, "padding": "4 14", "fontWeight": 900, "fontSize": 24, "letterSpacing": 1, "font": "Bricolage Grotesque", "textTransform": "uppercase" }
+        }
+      ]
+    },
+    {
+      "name": "ActionBar",
+      "role": "Tap alternatives to swiping",
+      "layout": { "display": "flex", "justify": "center", "align": "center", "gap": 22, "padding": "18 0 14" },
+      "children": [
+        { "name": "PassButton",     "control": "RoundButton", "size": 56, "background": "#fff", "border": "token.line", "icon": "close", "iconColor": "#9aa0a6", "action": "skip" },
+        { "name": "ReshuffleButton", "control": "RoundButton", "size": 46, "background": "#fff", "border": "token.line", "icon": "refresh", "iconColor": "token.sub", "action": "reshuffle deck" },
+        { "name": "AcceptButton",   "control": "RoundButton", "size": 56, "background": "token.accent", "border": "token.accent", "icon": "heart", "iconColor": "#fff", "action": "accept" }
+      ]
+    }
+  ],
+
+  "sharedControls": {
+    "RoundButton": {
+      "shape": "circle",
+      "border": "1.5px solid",
+      "shadow": "token.shadow.roundButton",
+      "pressTransform": "scale(0.9) on pointer down"
+    }
+  },
+
+  "transientUI": {
+    "Toast": { "trigger": "accept/reshuffle/giveBack", "position": "bottom center, 18px", "background": "token.ink", "textColor": "#fff", "shape": "pill", "autoHideMs": 1800 }
+  }
+}

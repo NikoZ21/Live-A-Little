@@ -1,0 +1,144 @@
+{
+  "$schema": "live-a-little/design-tokens",
+  "meta": {
+    "product": "live a little",
+    "description": "Tinder-style daily-dare app with a scrapbook storybook. Android prototype, 412x892 device canvas.",
+    "tagline": "Swipe right to take the dare, left to pass. Capture each moment into a storybook of your life.",
+    "deviceCanvas": { "width": 412, "height": 892, "platform": "Android (Material-ish)", "cornerRadius": 18 }
+  },
+
+  "colorPalettes": {
+    "_note": "Three swappable themes. 'sunny' is the default. accent/accent2 drive buttons, streak gradient and brand mark; the rest are surfaces/ink.",
+    "sunny": {
+      "accent": "#FF5A36",
+      "accent2": "#FF9F1C",
+      "bg": "#FFF8EE",
+      "paper": "#FFFDF7",
+      "paperBoard": "#F1E4CE",
+      "ink": "#241B17",
+      "sub": "#93826E",
+      "line": "#ECE0CF"
+    },
+    "candy": {
+      "accent": "#FF3D93",
+      "accent2": "#7C5CFF",
+      "bg": "#FFF4FA",
+      "paper": "#FFFFFF",
+      "paperBoard": "#F8DDEE",
+      "ink": "#2A1830",
+      "sub": "#9C7E92",
+      "line": "#F3DCEA"
+    },
+    "electric": {
+      "accent": "#2B6BFF",
+      "accent2": "#13C3A6",
+      "bg": "#F1F6FF",
+      "paper": "#FFFFFF",
+      "paperBoard": "#DCE8FA",
+      "ink": "#11203A",
+      "sub": "#7488A6",
+      "line": "#DBE6F5"
+    }
+  },
+
+  "colorRoles": {
+    "accent": "Primary action / brand. Buttons, active nav, streak gradient start.",
+    "accent2": "Secondary accent. Streak gradient end only.",
+    "bg": "App background surface.",
+    "paper": "Raised card / modal surface.",
+    "paperBoard": "Storybook scrapbook board (corkboard feel).",
+    "ink": "Primary text.",
+    "sub": "Secondary / muted text and meta.",
+    "line": "Hairline borders, dividers, inactive tracks."
+  },
+
+  "categories": {
+    "_note": "Challenge taxonomy. Each has a saturated color + a soft tint used as chip/background fill. 'verb' is the imperative shown on cards.",
+    "social":    { "label": "Social",    "verb": "Connect", "color": "#FF5A5F", "tint": "#FFE9E9", "icon": "social" },
+    "adventure": { "label": "Adventure", "verb": "Wander",  "color": "#13B6A6", "tint": "#DBF6F2", "icon": "adventure" },
+    "creative":  { "label": "Creative",  "verb": "Make",    "color": "#7C5CFF", "tint": "#EBE6FF", "icon": "creative" },
+    "kindness":  { "label": "Kindness",  "verb": "Give",    "color": "#FF6FB5", "tint": "#FFE6F3", "icon": "kindness" },
+    "food":      { "label": "Taste",     "verb": "Savor",   "color": "#FF9F1C", "tint": "#FFF0D6", "icon": "food" }
+  },
+
+  "typography": {
+    "fontFamilies": {
+      "display": { "stack": "'Bricolage Grotesque', system-ui, sans-serif", "use": "Titles, headings, brand mark, button labels", "weights": [600, 700, 800] },
+      "body":    { "stack": "'Hanken Grotesk', system-ui, sans-serif",     "use": "Meta, body copy, chips, nav labels", "weights": [500, 600, 700, 800] },
+      "hand":    { "stack": "'Caveat', cursive",                            "use": "Handwritten notes, scrapbook captions, encouraging lines", "weights": [500, 600, 700] }
+    },
+    "scale": {
+      "brandMark":     { "family": "display", "size": 26, "weight": 800, "letterSpacing": -0.5 },
+      "screenTitle":   { "family": "display", "size": 30, "weight": 800, "letterSpacing": -0.6, "lineHeight": 1.0 },
+      "cardTitle":     { "family": "display", "size": 44, "weight": 800, "letterSpacing": -0.8, "lineHeight": 0.98, "note": "38-40 in paper/duotone, 32-34 when big=true in detail" },
+      "sectionTitle":  { "family": "display", "size": 21, "weight": 800 },
+      "rowTitle":      { "family": "display", "size": 17, "weight": 800 },
+      "buttonLabel":   { "family": "display", "size": 16.5, "weight": 800 },
+      "cardBlurb":     { "family": "body", "size": 16.5, "weight": 600, "lineHeight": 1.45 },
+      "metaStrong":    { "family": "body", "size": 14, "weight": 700 },
+      "chip":          { "family": "body", "size": 13, "weight": 800, "textTransform": "uppercase", "letterSpacing": 0.3 },
+      "navLabel":      { "family": "body", "size": 11, "weight": "600|800 active" },
+      "statNumber":    { "family": "display", "size": 30, "weight": 800 },
+      "streakNumber":  { "family": "display", "size": 64, "weight": 800, "lineHeight": 1.0 },
+      "handCaption":   { "family": "hand", "size": 17, "lineHeight": 1.15 },
+      "handLine":      { "family": "hand", "size": 22 },
+      "noteInput":     { "family": "hand", "size": 21, "lineHeight": 1.3 }
+    }
+  },
+
+  "radii": {
+    "card": 30,
+    "modalSheet": "26 26 0 0",
+    "tile": 18,
+    "tileSmall": 13,
+    "chip": 100,
+    "pill": 100,
+    "button": 16,
+    "polaroid": 4,
+    "calendarCell": 12,
+    "deviceFrame": 18
+  },
+
+  "shadows": {
+    "cardTop": "0 24px 50px -18px rgba(0,0,0,0.4)",
+    "cardBehind": "0 14px 30px -16px rgba(0,0,0,0.3)",
+    "pill": "0 4px 14px -8px rgba(0,0,0,0.3)",
+    "roundButton": "0 6px 16px -8px rgba(0,0,0,0.35)",
+    "primaryButton": "0 10px 24px -10px <accent>",
+    "polaroid": "0 10px 22px -10px rgba(40,25,10,0.5)",
+    "toast": "0 12px 30px -10px rgba(0,0,0,0.5)",
+    "celebrationModal": "0 30px 60px -20px rgba(0,0,0,0.6)"
+  },
+
+  "spacing": {
+    "screenPaddingX": 20,
+    "cardPadding": "34 30",
+    "rowGap": 12,
+    "sectionGap": 16,
+    "tilePadding": "14 10"
+  },
+
+  "motion": {
+    "cardSwipeThresholdPx": 105,
+    "cardFlyMs": 300,
+    "cardSettle": "transform .32s cubic-bezier(.2,.8,.25,1)",
+    "sheetRise": "lalUp .28s cubic-bezier(.2,.8,.25,1)",
+    "celebrationPop": "lalPop .4s cubic-bezier(.2,1.2,.3,1)",
+    "confetti": "lalConf 0.9-1.8s rise+spin",
+    "toastAutoHideMs": 1800,
+    "celebrationDurationMs": 2100
+  },
+
+  "iconSet": {
+    "style": "rounded line icons, 24x24 viewbox, strokeWidth 2.1 default",
+    "names": ["social", "adventure", "creative", "kindness", "food", "spark", "cards", "book", "clock", "user", "close", "camera", "check", "heart", "flame", "arrowR", "refresh", "pin", "plus"]
+  },
+
+  "tweakableVariants": {
+    "palette": ["sunny", "candy", "electric"],
+    "cardStyle": ["bold", "paper", "duotone"],
+    "storyStyle": ["scrapbook", "timeline", "calendar"],
+    "captureStyle": ["photo (photo-first)", "words (note-first)"],
+    "showIcons": "boolean — category glyphs on cards/chips"
+  }
+}

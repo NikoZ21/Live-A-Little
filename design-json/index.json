@@ -1,0 +1,35 @@
+{
+  "$schema": "live-a-little/design-spec-index",
+  "product": "live a little",
+  "summary": "Design JSON spec for the 'live a little' daily-dare + storybook app. One file per page; shared values live in the tokens file and are referenced as 'token.*' / 'type.*' throughout.",
+
+  "howToRead": {
+    "token.*": "look up the literal value in 00-design-tokens.json (e.g. token.accent, token.line, token.radii.card).",
+    "type.*": "a named entry in 00-design-tokens.json > typography.scale.",
+    "category.*": "per-challenge values (color, tint, label, verb, icon) from 00-design-tokens.json > categories.",
+    "ref": "points to a component already fully described in another file (avoids duplication).",
+    "variants": "alternate renderings toggled by the user via the Tweaks panel."
+  },
+
+  "files": [
+    { "file": "00-design-tokens.json",  "describes": "Global tokens: palettes, categories, typography scale, radii, shadows, spacing, motion, icon set, tweak variants." },
+    { "file": "01-discover.json",       "describes": "Swipe deck home: header, draggable DareCard (bold/paper/duotone), swipe stamps, action bar." },
+    { "file": "02-active-sheet.json",   "describes": "Bottom sheet of accepted, in-progress dares." },
+    { "file": "03-dare-detail.json",    "describes": "Single dare view with encouragement note and give-back / done actions." },
+    { "file": "04-capture-moment.json", "describes": "Photo + handwritten note capture; celebration on save." },
+    { "file": "05-storybook.json",      "describes": "Memory keepsake in three layouts: scrapbook (default), timeline, calendar." },
+    { "file": "06-history.json",        "describes": "Chronological list of lived dares." },
+    { "file": "07-profile.json",        "describes": "Streak hero, stat tiles, category breakdown bars." },
+    { "file": "08-shared-chrome.json",  "describes": "Bottom nav + Android device frame shared across tabs." }
+  ],
+
+  "navigationMap": {
+    "tabs": ["discover", "storybook", "history", "profile"],
+    "overlays": {
+      "active": "from Discover header pill",
+      "detail": "from ActiveSheet row",
+      "capture": "from DareDetail 'Done' OR History/Storybook tap (edit mode)"
+    },
+    "primaryLoop": "Discover swipe right -> ActiveSheet -> DareDetail -> CaptureMoment -> Celebration -> Storybook"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "page": "ActiveSheet",
+  "route": "overlay (type: active) over Discover",
+  "purpose": "Bottom sheet listing dares the user has accepted but not yet completed. Tap a row to open its detail.",
+  "surface": {
+    "scrim": "rgba(20,14,10,0.4), tap to dismiss",
+    "sheet": { "background": "token.bg", "radius": "token.radii.modalSheet (26 26 0 0)", "padding": "14 20 26", "maxHeight": "76%", "enter": "token.motion.sheetRise" },
+    "zIndex": 50
+  },
+
+  "components": [
+    {
+      "name": "SheetGrabber",
+      "role": "Drag handle affordance",
+      "size": { "width": 42, "height": 5 },
+      "radius": 3,
+      "background": "token.line",
+      "align": "center"
+    },
+    {
+      "name": "SheetTitle",
+      "type": "text",
+      "content": "Dares in progress",
+      "typography": "type.sectionTitle",
+      "color": "token.ink"
+    },
+    {
+      "name": "ActiveList",
+      "role": "Vertical list of accepted dares",
+      "layout": { "display": "flex", "direction": "column", "gap": 12 },
+      "emptyState": {
+        "name": "EmptyActive",
+        "content": "Nothing on the go. Swipe right on a dare to start one.",
+        "typography": { "family": "body" },
+        "color": "token.sub",
+        "align": "center"
+      },
+      "children": [
+        {
+          "name": "ActiveRow",
+          "type": "button",
+          "action": "openDetail(card)",
+          "layout": { "display": "flex", "align": "center", "gap": 14, "padding": 14 },
+          "background": "#fff",
+          "border": "1px token.line",
+          "radius": "token.radii.tile (18)",
+          "children": [
+            {
+              "name": "CategoryIconTile",
+              "size": { "width": 46, "height": 46 },
+              "radius": "token.radii.tileSmall (13)",
+              "background": "category.tint",
+              "icon": "category.icon @24",
+              "iconColor": "category.color"
+            },
+            {
+              "name": "RowText",
+              "layout": { "flex": 1 },
+              "children": [
+                { "name": "RowTitle", "content": "challenge.title", "typography": "type.rowTitle", "color": "token.ink" },
+                { "name": "RowMeta", "content": "{label} \u00b7 {mins} min", "typography": { "family": "body", "size": 13.5, "weight": 600 }, "color": "token.sub" }
+              ]
+            },
+            { "name": "ChevronIcon", "icon": "arrowR", "size": 20, "color": "token.accent" }
+          ]
+        }
+      ]
+    }
+  ]
+}

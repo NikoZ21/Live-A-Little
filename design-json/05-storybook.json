@@ -1,0 +1,133 @@
+{
+  "page": "Storybook",
+  "route": "tab: storybook",
+  "purpose": "The emotional payoff: a keepsake view of every dare you've lived. Three tweakable layouts. Default is scrapbook.",
+  "surfaceByVariant": {
+    "scrapbook": "background token.paperBoard (corkboard)",
+    "timeline": "background token.bg",
+    "calendar": "background token.bg"
+  },
+
+  "components": [
+    {
+      "name": "ScreenHead",
+      "role": "Title + handwritten subtitle (shared across library screens)",
+      "layout": { "padding": "16 20 8" },
+      "children": [
+        { "name": "ScreenTitle", "content": "Storybook", "typography": "type.screenTitle", "color": "token.ink" },
+        { "name": "ScreenSubtitle", "content": "the little life you\u2019re building", "typography": "type.handLine", "color": "token.sub (or #7a6a55 on board)" }
+      ]
+    },
+    {
+      "name": "StoryCanvas",
+      "role": "Scrollable memory area, renders one of three layout variants",
+      "layout": { "flex": 1, "overflow": "auto" },
+      "emptyState": { "content": "Live a dare to start your story.", "typography": { "family": "body", "size": 15 }, "color": "token.sub", "align": "center" },
+
+      "variants": {
+        "scrapbook": {
+          "name": "ScrapbookGrid",
+          "layout": { "display": "grid", "columns": "1fr 1fr", "gap": 16 },
+          "rhythm": "alternate columns offset 18px top; each card rotated -3.5..3deg; hover scale 1.03",
+          "children": [
+            {
+              "name": "PolaroidCard",
+              "action": "openMemory(id)",
+              "background": "#fffdf8",
+              "padding": "10 10 8",
+              "radius": "token.radii.polaroid (4)",
+              "shadow": "token.shadow.polaroid",
+              "children": [
+                {
+                  "name": "TapeStrip",
+                  "role": "Washi tape across the top",
+                  "size": { "width": 64, "height": 26 },
+                  "background": "rgba(255,221,120,0.62)",
+                  "rotate": "\u00b14deg"
+                },
+                {
+                  "name": "PolaroidPhoto",
+                  "aspect": "1/1",
+                  "content": "memory.photo OR placeholder gradient by photoIdx",
+                  "overlay": { "name": "CategoryDot", "size": 7, "color": "category.color", "ring": "3px rgba(255,255,255,0.55)" }
+                },
+                {
+                  "name": "PolaroidCaption",
+                  "content": "memory.note (clamped 3 lines) OR challenge.title",
+                  "typography": "type.handCaption",
+                  "color": "#33271d"
+                },
+                {
+                  "name": "PolaroidDate",
+                  "content": "relative date (Today / Yesterday / N days ago / Mon D)",
+                  "typography": { "family": "body", "size": 10.5, "weight": 700, "textTransform": "uppercase", "letterSpacing": 0.4 },
+                  "color": "category.color"
+                }
+              ]
+            }
+          ]
+        },
+
+        "timeline": {
+          "name": "TimelineList",
+          "layout": { "position": "relative", "paddingLeft": 26 },
+          "spine": { "name": "TimelineSpine", "position": "left 7", "width": 2, "color": "token.line" },
+          "children": [
+            {
+              "name": "TimelineEntry",
+              "layout": { "display": "flex", "direction": "column", "gap": 18 },
+              "children": [
+                { "name": "TimelineDot", "size": 16, "background": "category.color", "border": "3px token.bg", "position": "on spine" },
+                { "name": "EntryDate", "content": "relative date", "typography": { "family": "body", "size": 12.5, "weight": 700 }, "color": "token.sub" },
+                {
+                  "name": "MemoryCard",
+                  "action": "openMemory(id)",
+                  "background": "#fff",
+                  "border": "1px token.line",
+                  "radius": "token.radii.tile (18)",
+                  "shadow": "0 8px 20px -14px rgba(0,0,0,0.3)",
+                  "children": [
+                    { "name": "MemoryPhoto", "height": 150, "content": "photo OR placeholder gradient" },
+                    { "name": "MemoryTitle", "content": "challenge.title", "typography": "type.rowTitle", "color": "token.ink" },
+                    { "name": "MemoryNote", "content": "memory.note OR challenge.blurb", "typography": { "family": "hand", "size": 19 }, "color": "#4a3c30" }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+
+        "calendar": {
+          "name": "CalendarMonth",
+          "monthLabel": { "content": "Month YYYY", "typography": "type.sectionTitle", "align": "center" },
+          "weekdayRow": { "labels": ["S","M","T","W","T","F","S"], "typography": { "family": "body", "size": 11, "weight": 800 }, "color": "token.sub" },
+          "grid": { "columns": "repeat(7,1fr)", "gap": 6 },
+          "children": [
+            {
+              "name": "DayCell",
+              "aspect": "1/1",
+              "radius": "token.radii.calendarCell (12)",
+              "states": {
+                "empty": { "background": "#fff", "border": "1px token.line" },
+                "hasMemory": { "background": "#111 + photo/gradient", "action": "openMemory(id)", "CategoryDot": "bottom-right 8px category.color" },
+                "outsideMonth": "transparent"
+              },
+              "dayNumber": { "position": "top-left", "typography": { "family": "body", "size": 11.5, "weight": 800 }, "color": "#fff on photo / token.sub on empty" }
+            }
+          ]
+        }
+      }
+    }
+  ],
+
+  "sharedDataModel": {
+    "memory": {
+      "id": "string",
+      "cid": "challenge id reference",
+      "done": "timestamp",
+      "note": "string (handwritten)",
+      "photo": "dataURL | null",
+      "photoIdx": "int 0-5 -> placeholder gradient"
+    }
+  }
+}

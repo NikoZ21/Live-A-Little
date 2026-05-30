@@ -1,0 +1,98 @@
+{
+  "page": "Profile",
+  "route": "tab: profile (label 'You')",
+  "purpose": "Personal stats: streak, totals, and what categories the user reaches for, framed in an encouraging voice.",
+  "surface": { "background": "token.bg", "layout": "column" },
+
+  "components": [
+    {
+      "name": "ScreenHead",
+      "ref": "05-storybook.json#ScreenHead",
+      "children": [
+        { "name": "ScreenTitle", "content": "You", "typography": "type.screenTitle" },
+        { "name": "ScreenSubtitle", "content": "your appetite for life", "typography": "type.handLine", "color": "token.sub" }
+      ]
+    },
+    {
+      "name": "ProfileBody",
+      "layout": { "flex": 1, "overflow": "auto", "padding": "4 20 26" },
+      "children": [
+        {
+          "name": "StreakHero",
+          "role": "Headline gradient panel",
+          "background": "linear-gradient(135deg, token.accent, token.accent2)",
+          "textColor": "#fff",
+          "radius": 24,
+          "padding": "22 22 24",
+          "decoration": "oversized flame glyph, opacity 0.18, top-right",
+          "children": [
+            { "name": "StreakLabel", "content": "CURRENT STREAK", "typography": { "family": "body", "size": 14, "weight": 800, "letterSpacing": 0.3 }, "opacity": 0.9 },
+            { "name": "StreakNumber", "content": "{streak} days", "typography": "type.streakNumber", "note": "'days' suffix at 24px" },
+            { "name": "StreakLine", "content": "keep the spark going \u2014 you\u2019re doing beautifully.", "typography": "type.handLine" }
+          ]
+        },
+        {
+          "name": "StatRow",
+          "layout": { "display": "grid", "columns": "1fr 1fr 1fr", "gap": 12 },
+          "children": [
+            {
+              "name": "StatTile",
+              "instances": [
+                { "value": "{done count}", "label": "dares lived" },
+                { "value": "{this week count}", "label": "this week" },
+                { "value": "{skipped count}", "label": "passed on" }
+              ],
+              "background": "#fff",
+              "border": "1px token.line",
+              "radius": "token.radii.tile (18)",
+              "padding": "14 10",
+              "align": "center",
+              "children": [
+                { "name": "StatNumber", "typography": "type.statNumber", "color": "token.ink" },
+                { "name": "StatLabel", "typography": { "family": "body", "size": 12, "weight": 700 }, "color": "token.sub" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CategoryBreakdown",
+          "role": "Bar chart of dares per category",
+          "background": "#fff",
+          "border": "1px token.line",
+          "radius": "token.radii.tile (20)",
+          "padding": "18 18 8",
+          "children": [
+            { "name": "BreakdownTitle", "content": "What you reach for", "typography": "type.rowTitle", "color": "token.ink" },
+            {
+              "name": "CategoryBarRow",
+              "repeatFor": "each category",
+              "layout": { "display": "flex", "align": "center", "gap": 12 },
+              "children": [
+                { "name": "BarLabel", "content": "category.label", "width": 80, "typography": { "family": "body", "size": 13.5, "weight": 700 }, "color": "token.ink" },
+                {
+                  "name": "BarTrack",
+                  "height": 12,
+                  "radius": 6,
+                  "background": "category.tint",
+                  "child": { "name": "BarFill", "background": "category.color", "width": "count / maxCount * 100%", "transition": "width .5s" }
+                },
+                { "name": "BarCount", "content": "{count}", "width": 22, "align": "right", "typography": { "family": "body", "size": 14, "weight": 800 }, "color": "token.sub" }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "TopCategoryCard",
+          "role": "Encouraging summary of most-done category",
+          "visibleWhen": "top category count > 0",
+          "background": "topCategory.tint",
+          "radius": "token.radii.tile (18)",
+          "padding": "16 18",
+          "children": [
+            { "name": "TopCategoryLine", "content": "You\u2019re at your happiest being {category}.", "typography": "type.handLine", "color": "topCategory.color" }
+          ]
+        }
+      ]
+    }
+  ]
+}

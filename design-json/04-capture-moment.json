@@ -1,0 +1,116 @@
+{
+  "page": "CaptureMoment",
+  "route": "overlay (type: capture), zIndex 60. Same component used for NEW capture and EDIT of an existing memory.",
+  "purpose": "Keep the moment after doing a dare: upload a photo and write a handwritten note. Saving adds it to the storybook and (for new captures) fires the celebration.",
+  "surface": { "background": "token.bg", "layout": "column" },
+  "modeNote": "If opened via openMemory(id) it preloads existing.photo + existing.note and switches title to 'Edit memory' / button to 'Save changes'.",
+
+  "components": [
+    {
+      "name": "TopBar",
+      "ref": "03-dare-detail.json#TopBar",
+      "title": "Keep the moment | Edit memory"
+    },
+    {
+      "name": "CaptureBody",
+      "layout": { "flex": 1, "overflow": "auto", "padding": "12 20 16" },
+      "children": [
+        {
+          "name": "ChallengeChip",
+          "role": "Reminder of which dare this is",
+          "shape": "pill",
+          "background": "category.tint",
+          "color": "category.color",
+          "icon": "category.icon @16",
+          "content": "challenge.title",
+          "typography": "type.chip (no uppercase here)"
+        },
+        {
+          "name": "CaptureFields",
+          "role": "Photo + note. ORDER is tweakable via captureStyle.",
+          "layout": { "display": "flex", "direction": "column", "gap": 18 },
+          "order": { "photo": "PhotoDropzone first", "words": "NoteField first" },
+          "children": [
+            {
+              "name": "PhotoDropzone",
+              "type": "file-upload",
+              "height": 230,
+              "radius": "token.radii.tile (18)",
+              "emptyState": {
+                "border": "2px dashed token.line",
+                "background": "#fff",
+                "children": [
+                  { "name": "CameraBadge", "shape": "circle 56", "background": "category.tint", "icon": "camera @26", "iconColor": "category.color" },
+                  { "name": "DropPrompt", "content": "Add a photo of the moment", "typography": { "family": "body", "size": 15, "weight": 700 } },
+                  { "name": "DropSubPrompt", "content": "tap to upload \u2014 or skip it", "typography": { "family": "body", "size": 13 }, "opacity": 0.7 }
+                ]
+              },
+              "filledState": {
+                "background": "#111",
+                "image": "uploaded photo, object-fit cover, client-resized to max 720px @ jpeg 0.78",
+                "RemoveButton": { "shape": "circle 32", "position": "top-right 10", "background": "rgba(0,0,0,0.5)", "icon": "close @18 #fff" }
+              }
+            },
+            {
+              "name": "NoteField",
+              "children": [
+                { "name": "NotePrompt", "content": "challenge.prompt (e.g. 'What caught your eye?')", "typography": { "family": "display", "size": 15, "weight": 800 }, "color": "token.ink" },
+                {
+                  "name": "NoteTextarea",
+                  "type": "textarea",
+                  "placeholder": "Write it down before it fades\u2026",
+                  "minHeight": 120,
+                  "background": "#FFFEFB",
+                  "border": "1px token.line",
+                  "radius": "token.radii.button (16)",
+                  "typography": "type.noteInput (Caveat handwriting, 21px)",
+                  "color": "token.ink"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CaptureFooter",
+      "layout": { "padding": "12 20 18" },
+      "borderTop": "1px token.line",
+      "background": "token.bg",
+      "children": [
+        {
+          "name": "SaveButton",
+          "control": "PrimaryButton",
+          "width": "100%",
+          "icon": "check @20 #fff",
+          "content": "Add to my storybook | Save changes",
+          "action": "saveMemory(card, {note, photo, photoIdx}, existing)",
+          "style": { "background": "token.accent", "color": "#fff", "radius": "token.radii.button", "shadow": "token.shadow.primaryButton", "typography": "type.buttonLabel" }
+        }
+      ]
+    }
+  ],
+
+  "celebrationOnSave": {
+    "name": "Celebration",
+    "trigger": "new capture only, ~2100ms",
+    "zIndex": 90,
+    "scrim": "rgba(20,14,10,0.45)",
+    "children": [
+      { "name": "Confetti", "count": 26, "colors": ["#FF5A36", "#FF9F1C", "#13B6A6", "#7C5CFF", "#FF6FB5"], "animation": "rise -260px + spin 540deg" },
+      {
+        "name": "CelebrationCard",
+        "background": "token.paper",
+        "radius": 24,
+        "padding": "26 28",
+        "shadow": "token.shadow.celebrationModal",
+        "enter": "token.motion.celebrationPop",
+        "children": [
+          { "name": "CheckBadge", "shape": "circle 64", "background": "category.color", "icon": "check @34 #fff" },
+          { "name": "CelebrationTitle", "content": "Another one lived.", "typography": { "family": "display", "size": 24, "weight": 800 }, "color": "token.ink" },
+          { "name": "CelebrationLine", "content": "\u201c{title}\u201d is in your story now.", "typography": "type.handLine", "color": "category.color" }
+        ]
+      }
+    ]
+  }
+}

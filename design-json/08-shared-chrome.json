@@ -1,0 +1,53 @@
+{
+  "page": "_SharedChrome",
+  "purpose": "Persistent navigation present across the four primary tabs (hidden while any overlay is open).",
+
+  "components": [
+    {
+      "name": "BottomNav",
+      "role": "Primary tab bar",
+      "visibleWhen": "no overlay open",
+      "layout": { "display": "flex", "padding": "6 8 4" },
+      "borderTop": "1px token.line",
+      "background": "token.bg",
+      "children": [
+        {
+          "name": "NavItem",
+          "type": "button",
+          "instances": [
+            { "key": "discover",  "icon": "spark", "label": "Discover" },
+            { "key": "storybook", "icon": "book",  "label": "Storybook" },
+            { "key": "history",   "icon": "clock", "label": "History" },
+            { "key": "profile",   "icon": "user",  "label": "You" }
+          ],
+          "layout": { "flex": 1, "display": "flex", "direction": "column", "align": "center", "gap": 3, "padding": "6 0" },
+          "children": [
+            {
+              "name": "NavIconPill",
+              "size": { "width": 56, "height": 30 },
+              "radius": 16,
+              "background": "transparent | token.accent @ 13% alpha when active",
+              "icon": "navItem.icon @23",
+              "iconColor": "active ? token.accent : token.sub"
+            },
+            {
+              "name": "NavLabel",
+              "content": "navItem.label",
+              "typography": "type.navLabel",
+              "color": "active ? token.accent : token.sub"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "DeviceFrame",
+      "role": "Android device shell wrapping the whole app",
+      "ref": "frames/android-frame.jsx",
+      "size": { "width": 412, "height": 892 },
+      "radius": 18,
+      "surface": "token.bg",
+      "includes": ["AndroidStatusBar (40px, matches bg)", "gesture nav bar"]
+    }
+  ]
+}
