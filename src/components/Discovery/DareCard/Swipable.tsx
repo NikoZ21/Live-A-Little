@@ -1,4 +1,8 @@
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import {
+  Gesture,
+  GestureDetector,
+  GestureHandlerRootView,
+} from "react-native-gesture-handler";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -35,6 +39,7 @@ export default function Swipeable({
         translateX.value = withTiming(FLY_OFF, { duration: 300 }, () => {
           scheduleOnRN(() => {
             onAccept();
+            console.log("accept");
           });
         });
       } else if (translateX.value < -SWIPE_THRESHOLD) {
@@ -42,6 +47,7 @@ export default function Swipeable({
         translateX.value = withTiming(-FLY_OFF, { duration: 300 }, () => {
           scheduleOnRN(() => {
             onPass();
+            console.log("pass");
           });
         });
       } else {
@@ -60,10 +66,12 @@ export default function Swipeable({
   }));
 
   return (
-    <GestureDetector gesture={pan}>
-      <Animated.View style={[{ flex: 1 }, animatedStyle]}>
-        {children}
-      </Animated.View>
-    </GestureDetector>
+    <GestureHandlerRootView>
+      <GestureDetector gesture={pan}>
+        <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+          {children}
+        </Animated.View>
+      </GestureDetector>
+    </GestureHandlerRootView>
   );
 }
