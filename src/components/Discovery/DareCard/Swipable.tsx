@@ -1,8 +1,4 @@
-import {
-  Gesture,
-  GestureDetector,
-  GestureHandlerRootView,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -66,12 +62,10 @@ export default function Swipeable({
   }));
 
   return (
-    <GestureHandlerRootView>
-      <GestureDetector gesture={pan}>
-        <Animated.View style={[{ flex: 1 }, animatedStyle]}>
-          {children}
-        </Animated.View>
-      </GestureDetector>
-    </GestureHandlerRootView>
+    <GestureDetector gesture={pan}>
+      <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+        {children}
+      </Animated.View>
+    </GestureDetector>
   );
 }

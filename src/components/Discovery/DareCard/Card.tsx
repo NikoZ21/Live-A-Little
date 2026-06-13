@@ -1,7 +1,10 @@
+import { Dare } from "@/data/dares";
 import { Clock, Pencil } from "lucide-react-native";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function Card() {
+export default function Card({ dare }: { dare: Dare }) {
+  const { category, minutes, difficulty, blurb, title } = dare;
+
   return (
     <View style={styles.card}>
       <View style={styles.decoration} pointerEvents="none">
@@ -16,18 +19,15 @@ export default function Card() {
 
       <View style={{ flex: 1 }} />
 
-      <Text style={styles.dareNumber}>DARE №13</Text>
-      <Text style={styles.cardTitle}>Draw the view</Text>
-      <Text style={styles.cardBlurb}>
-        Whatever&apos;s in front of you. It doesn&apos;t need to be good — just
-        looked at closely.
-      </Text>
+      <Text style={styles.dareNumber}>DARE №{dare.id}</Text>
+      <Text style={styles.cardTitle}>{title}</Text>
+      <Text style={styles.cardBlurb}>{blurb}</Text>
 
       {/* Meta row */}
       <View style={styles.metaRow}>
         <View style={styles.metaItem}>
           <Clock size={15} color="#fff" strokeWidth={2.5} />
-          <Text style={styles.metaText}>10 min</Text>
+          <Text style={styles.metaText}>{minutes} min</Text>
         </View>
         <View style={styles.metaItem}>
           <Text style={styles.metaText}>nerve</Text>
