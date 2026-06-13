@@ -3,10 +3,10 @@ import { Clock, Pencil } from "lucide-react-native";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Card({ dare }: { dare: Dare }) {
-  const { category, minutes, difficulty, blurb, title } = dare;
+  const { category, minutes, difficulty, blurb, title, color } = dare;
 
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, { backgroundColor: color }]}>
       <View style={styles.decoration} pointerEvents="none">
         <Pencil size={210} color="#fff" strokeWidth={1.6} opacity={0.16} />
       </View>

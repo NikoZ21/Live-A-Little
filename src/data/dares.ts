@@ -11,6 +11,7 @@ export interface Dare {
   minutes: number;
   difficulty: 1 | 2 | 3; // nerve dots
   category: DareCategory;
+  color: string;
 }
 
 export const DARES: Dare[] = [
@@ -22,6 +23,7 @@ export const DARES: Dare[] = [
     minutes: 5,
     difficulty: 2,
     category: "social",
+    color: "#FF5A36",
   },
   {
     id: 2,
@@ -30,6 +32,7 @@ export const DARES: Dare[] = [
     minutes: 20,
     difficulty: 1,
     category: "adventure",
+    color: "#13B6A6",
   },
   {
     id: 3,
@@ -39,6 +42,7 @@ export const DARES: Dare[] = [
     minutes: 10,
     difficulty: 1,
     category: "creative",
+    color: "#7C5CFF",
   },
   {
     id: 4,
@@ -48,6 +52,7 @@ export const DARES: Dare[] = [
     minutes: 5,
     difficulty: 1,
     category: "kindness",
+    color: "#FF6FB5",
   },
   {
     id: 5,
@@ -56,6 +61,7 @@ export const DARES: Dare[] = [
     minutes: 30,
     difficulty: 2,
     category: "food",
+    color: "#FF9F1C",
   },
   {
     id: 6,
@@ -64,6 +70,7 @@ export const DARES: Dare[] = [
     minutes: 10,
     difficulty: 1,
     category: "social",
+    color: "#FF5A36",
   },
   {
     id: 7,
@@ -72,6 +79,7 @@ export const DARES: Dare[] = [
     minutes: 45,
     difficulty: 3,
     category: "adventure",
+    color: "#13B6A6",
   },
   {
     id: 8,
@@ -81,6 +89,7 @@ export const DARES: Dare[] = [
     minutes: 10,
     difficulty: 2,
     category: "creative",
+    color: "#7C5CFF",
   },
   {
     id: 9,
@@ -89,6 +98,7 @@ export const DARES: Dare[] = [
     minutes: 5,
     difficulty: 2,
     category: "kindness",
+    color: "#FF6FB5",
   },
   {
     id: 10,
@@ -97,5 +107,6 @@ export const DARES: Dare[] = [
     minutes: 60,
     difficulty: 3,
     category: "food",
+    color: "#FF9F1C",
   },
 ];
