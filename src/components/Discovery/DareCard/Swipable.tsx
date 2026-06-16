@@ -24,6 +24,16 @@ export default function Swipeable({
   const translateX = useSharedValue(0);
   const translateY = useSharedValue(0);
 
+  const handleAccept = () => {
+    onAccept();
+    console.log("accept");
+  };
+
+  const handlePass = () => {
+    onPass();
+    console.log("pass");
+  };
+
   const pan = Gesture.Pan()
     .onChange((e) => {
       translateX.value += e.changeX;
@@ -33,18 +43,12 @@ export default function Swipeable({
       if (translateX.value > SWIPE_THRESHOLD) {
         // fly off right -> accept
         translateX.value = withTiming(FLY_OFF, { duration: 300 }, () => {
-          scheduleOnRN(() => {
-            onAccept();
-            console.log("accept");
-          });
+          scheduleOnRN(handleAccept);
         });
       } else if (translateX.value < -SWIPE_THRESHOLD) {
         // fly off left -> pass
         translateX.value = withTiming(-FLY_OFF, { duration: 300 }, () => {
-          scheduleOnRN(() => {
-            onPass();
-            console.log("pass");
-          });
+          scheduleOnRN(handlePass);
         });
       } else {
         // snap back
