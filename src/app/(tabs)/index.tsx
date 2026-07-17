@@ -63,16 +63,18 @@ export default function Index() {
       </View>
       {/* Action bar */}
       <View style={styles.actionBar}>
-        <ActionButton buttonStyle={styles.passButton}>
+        <ActionButton buttonStyle={styles.passButton} handlePress={advance}>
           <X size={24} color={COLORS.passIcon} strokeWidth={2.5} />
         </ActionButton>
+
         <ActionButton
           buttonStyle={styles.reshuffleButton}
           handlePress={handleRefresh}
         >
           <RefreshCcw size={19} color={COLORS.sub} strokeWidth={2.5} />
         </ActionButton>
-        <ActionButton buttonStyle={styles.acceptButton}>
+
+        <ActionButton buttonStyle={styles.acceptButton} handlePress={advance}>
           <Heart size={24} color="#fff" strokeWidth={2.5} fill="#fff" />
         </ActionButton>
       </View>
