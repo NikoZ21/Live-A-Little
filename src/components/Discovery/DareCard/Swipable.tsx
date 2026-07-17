@@ -1,3 +1,4 @@
+import { StyleSheet, Text } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useAnimatedStyle,
@@ -6,6 +7,8 @@ import Animated, {
   withTiming,
 } from "react-native-reanimated";
 import { scheduleOnRN } from "react-native-worklets";
+
+import { useOverlayStyle } from "@/hooks/useOverlayStyle";
 
 const SWIPE_THRESHOLD = 105; // from your design tokens
 const FLY_OFF = 520;
@@ -65,11 +68,59 @@ export default function Swipeable({
     ],
   }));
 
+  const acceptOverlayStyle = useOverlayStyle({
+    translateX: translateX,
+    threshold: SWIPE_THRESHOLD,
+  });
+
+  const skipOverlayStyle = useOverlayStyle({
+    translateX: translateX,
+    threshold: -SWIPE_THRESHOLD,
+  });
+
   return (
     <GestureDetector gesture={pan}>
       <Animated.View style={[{ flex: 1 }, animatedStyle]}>
         {children}
+
+        <Animated.View
+          style={[styles.overlay, styles.acceptOverlay, acceptOverlayStyle]}
+          pointerEvents="none"
+        >
+          <Text style={styles.overlayText}>ACCEPTED</Text>
+        </Animated.View>
+
+        <Animated.View
+          style={[styles.overlay, styles.skipOverlay, skipOverlayStyle]}
+          pointerEvents="none"
+        >
+          <Text style={styles.overlayText}>SKIPPED</Text>
+        </Animated.View>
       </Animated.View>
     </GestureDetector>
   );
 }
+
+const styles = StyleSheet.create({
+  overlay: {
+    ...StyleSheet.absoluteFillObject,
+    borderRadius: 30,
+    marginTop: 4,
+    marginHorizontal: 20,
+    justifyContent: "center",
+    alignItems: "center",
+    opacity: 0,
+  },
+  acceptOverlay: {
+    backgroundColor: "#2ECC71",
+  },
+  skipOverlay: {
+    backgroundColor: "#E5383B",
+  },
+  overlayText: {
+    color: "#fff",
+    fontSize: 32,
+    fontWeight: "800",
+    letterSpacing: 1,
+  },
+});

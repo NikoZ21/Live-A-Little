@@ -1,14 +1,17 @@
 import { useState } from "react";
 
-import { Heart, RefreshCw, X } from "lucide-react-native";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Heart, RefreshCcw, X } from "lucide-react-native";
+import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Card from "../../components/Discovery/DareCard/Card";
-import Swipeable from "../../components/Discovery/DareCard/Swipable";
-import Header from "../../components/Discovery/Header";
+import ActiveSheet from "@/components/Discovery/ActiveSheet";
+import Card from "@/components/Discovery/DareCard/Card";
+import Swipeable from "@/components/Discovery/DareCard/Swipable";
+import Header from "@/components/Discovery/Header";
 
-import { DARES } from "../../data/dares";
+import { DARES, Dare } from "@/data/dares";
+
+import ActionButton from "@/components/Discovery/ActionButton";
 
 const COLORS = {
   accent: "#FF5A36",
@@ -20,15 +23,29 @@ const COLORS = {
   passIcon: "#9aa0a6",
 };
 
+/** Dummy actives for the sheet UI — wire to real accept state later */
+const INITIAL_ACTIVES: Dare[] = [DARES[7], DARES[2]];
+
 export default function Index() {
   const [deckIndex, setDeckIndex] = useState(0);
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [actives] = useState<Dare[]>(INITIAL_ACTIVES);
+
   const topDare = DARES[deckIndex];
   const nextDare = DARES[deckIndex + 1];
   const advance = () => setDeckIndex((i) => i + 1);
 
+  const handleRefresh = () => {
+    console.log("refershing index");
+    setDeckIndex(0);
+  };
+
   return (
     <SafeAreaView style={styles.screen} edges={["top", "left", "right"]}>
-      <Header />
+      <Header
+        activeCount={actives.length}
+        onPressActive={() => setSheetOpen(true)}
+      />
 
       <View style={{ flex: 1 }}>
         {/* BEHIND: next card, static, no gestures */}
@@ -46,16 +63,29 @@ export default function Index() {
       </View>
       {/* Action bar */}
       <View style={styles.actionBar}>
-        <Pressable style={[styles.roundButton, styles.passButton]}>
+        <ActionButton buttonStyle={styles.passButton}>
           <X size={24} color={COLORS.passIcon} strokeWidth={2.5} />
-        </Pressable>
-        <Pressable style={[styles.roundButton, styles.reshuffleButton]}>
-          <RefreshCw size={19} color={COLORS.sub} strokeWidth={2.5} />
-        </Pressable>
-        <Pressable style={[styles.roundButton, styles.acceptButton]}>
+        </ActionButton>
+        <ActionButton
+          buttonStyle={styles.reshuffleButton}
+          handlePress={handleRefresh}
+        >
+          <RefreshCcw size={19} color={COLORS.sub} strokeWidth={2.5} />
+        </ActionButton>
+        <ActionButton buttonStyle={styles.acceptButton}>
           <Heart size={24} color="#fff" strokeWidth={2.5} fill="#fff" />
-        </Pressable>
+        </ActionButton>
       </View>
+
+      <ActiveSheet
+        visible={sheetOpen}
+        actives={actives}
+        onClose={() => setSheetOpen(false)}
+        onSelect={(dare) => {
+          // TODO: navigate to dare detail
+          console.log("selected active dare", dare.id);
+        }}
+      />
     </SafeAreaView>
   );
 }
@@ -74,17 +104,7 @@ const styles = StyleSheet.create({
     paddingTop: 18,
     paddingBottom: 14,
   },
-  roundButton: {
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 100,
-    borderWidth: 1.5,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.18,
-    shadowRadius: 8,
-    elevation: 4,
-  },
+
   passButton: {
     width: 56,
     height: 56,

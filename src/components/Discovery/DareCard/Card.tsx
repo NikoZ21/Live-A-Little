@@ -3,10 +3,17 @@ import { Clock, Pencil } from "lucide-react-native";
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Card({ dare }: { dare: Dare }) {
-  const { category, minutes, difficulty, blurb, title, color } = dare;
+  const { category, minutes, difficulty, description: blurb, title } = dare;
+
+  const dotStyle = (index: number) => {
+    if (difficulty >= index) {
+      return styles.dotFilled;
+    }
+    return styles.dotEmpty;
+  };
 
   return (
-    <View style={[styles.card, { backgroundColor: color }]}>
+    <View style={[styles.card, { backgroundColor: category.color }]}>
       <View style={styles.decoration} pointerEvents="none">
         <Pencil size={210} color="#fff" strokeWidth={1.6} opacity={0.16} />
       </View>
@@ -32,9 +39,9 @@ export default function Card({ dare }: { dare: Dare }) {
         <View style={styles.metaItem}>
           <Text style={styles.metaText}>nerve</Text>
           <View style={styles.dots}>
-            <View style={[styles.dot, styles.dotFilled]} />
-            <View style={[styles.dot, styles.dotEmpty]} />
-            <View style={[styles.dot, styles.dotEmpty]} />
+            <View style={[styles.dot, dotStyle(1)]} />
+            <View style={[styles.dot, dotStyle(2)]} />
+            <View style={[styles.dot, dotStyle(3)]} />
           </View>
         </View>
       </View>

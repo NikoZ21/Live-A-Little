@@ -1,16 +1,26 @@
 import { Flame } from "lucide-react-native";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function Header() {
+interface HeaderProps {
+  activeCount?: number;
+  onPressActive?: () => void;
+}
+
+export default function Header({
+  activeCount = 0,
+  onPressActive,
+}: HeaderProps) {
   return (
     <>
       <View style={styles.header}>
         <Text style={styles.brandMark}>
           live <Text style={{ color: "#FF5A36" }}>a little</Text>
         </Text>
-        <Pressable style={styles.activePill}>
+        <Pressable style={styles.activePill} onPress={onPressActive}>
           <Flame size={16} color={"#FF5A36"} strokeWidth={2.5} />
-          <Text style={styles.activePillText}>7 active</Text>
+          <Text style={styles.activePillText}>
+            {activeCount} active
+          </Text>
         </Pressable>
       </View>
 
@@ -20,6 +30,7 @@ export default function Header() {
     </>
   );
 }
+
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
